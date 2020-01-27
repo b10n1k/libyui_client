@@ -24,6 +24,46 @@ Or install it yourself as:
 
 TODO: Write usage instructions here
 
+## Setup Environment
+We use [rbenv](http://github.com/rbenv/rbenv) to setup the desired ruby and isolated it from the system. This will provide us with a common environment to work on. `rbenv` sets up the PATH variable to find the installed gems which is stored under a directory of each version.
+
+To setup the environment run (for bash users)
+```
+$ ./runme.sh
+```
+TODO: script is in progress
+The script setup rbenv with specific Ruby version and then executes the `bin/setup` to install all the required gems.
+
+Other useful commands
+- Verify rbenv installation
+```bash
+$ curl -fsSL https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-doctor | bash
+```
+
+- List available versions
+```bash
+$ rbenv install -l
+```
+
+- Check what version rbenv is using
+```bash
+$ rbenv version
+```
+- Set ruby for current directory
+```bash
+$ rbenv local <rb_version>
+```
+
+- Set ruby for the whole system
+```bash
+$ rbenv global <rb_version>
+```
+
+- Check where gems are loated
+```bash
+$ gem env home
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
