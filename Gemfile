@@ -7,3 +7,4 @@ gemspec
 gem 'rainbow'
 gem 'rubocop'
 gem 'aruba'
+gem 'cheetah'

@@ -12,7 +12,7 @@ module LibyuiClient
   # set the application introspection port for communication
   def self.set_port
     # 14155 is currently an unassigned port
-    ENV['YUI_HTTP_PORT'] ||= '14155'
+    ENV['YUI_HTTP_PORT'] ||= '9999'
     ENV['YUI_HTTP_PORT']
   end
 
@@ -44,13 +44,13 @@ module LibyuiClient
   # start the application in background
   # @param application [String] the command to start
   def self.start_app(application)
-    @@app_host = 'localhost'
+    @@app_host ='192.168.121.188'
     @@app_port = set_port
 
     # another app already running?
-    if port_open?(@@app_host, @@app_port)
-      raise "The port #{@@app_host}:#{@@app_port} is already open!"
-    end
+    #if port_open?(@@app_host, @@app_port)
+    #  raise "The port #{@@app_host}:#{@@app_port} is already open!"
+    #end
 
     puts "Starting #{application}..." if ENV['DEBUG']
     # create a new process group so easily we will be able

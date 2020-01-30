@@ -2,7 +2,13 @@
 
 require 'bundler/gem_tasks'
 require 'rspec/core/rake_task'
+require_relative 'lib/Vagrant_runner'
 
-RSpec::Core::RakeTask.new(:spec)
+task :spec => [:vagrant_runner] do
+  RSpec::Core::RakeTask.new(:spec)
+end
 
-task default: :spec
+task :vagrant_runner do
+  VagrantRunner.new("default", "/home/test/boxes", "root")
+end
+
