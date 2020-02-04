@@ -3,6 +3,8 @@
 require 'timeout'
 require 'socket'
 require 'rainbow'
+require_relative '../../lib/Vagrant_runner'
+include VagrantRunner
 
 # Client to interact with YAST UI rest api framework for integration testing
 module LibyuiClient
@@ -43,20 +45,25 @@ module LibyuiClient
 
   # start the application in background
   # @param application [String] the command to start
-  def self.start_app(application)
-    @@app_host ='192.168.121.188'
+  def self.start_app(application, sut_ip)
+    @@app_host = sut_ip
     @@app_port = set_port
 
     # another app already running?
-    #if port_open?(@@app_host, @@app_port)
-    #  raise "The port #{@@app_host}:#{@@app_port} is already open!"
-    #end
+    if port_open?(@@app_host, @@app_port)
+      raise "The port #{@@app_host}:#{@@app_port} is already open!"
+    end
 
     puts "Starting #{application}..." if ENV['DEBUG']
-    # create a new process group so easily we will be able
-    # to kill all its subprocesses
-    @@app_pid = spawn(application, pgroup: true)
-    wait_for_port(@@app_host, @@app_port)
+    if sut_ip != 'localhost'
+      VagrantRunner.run(application)
+    else
+      # create a new process group so easily we will be able
+      # to kill all its subprocesses
+      @@app_pid = spawn(application, pgroup: true)
+      wait_for_port(@@app_host, @@app_port)
+    end
+
     puts Rainbow("\tlaunches application '#{application}'").blue
   end
 

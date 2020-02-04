@@ -15,6 +15,6 @@ if [ $? -eq 0 ]; then
 else
     echo "run sudo zypper in libopenssl-devel and try again"
 fi
-eval "rbenv global 2.7.0"
+eval "rbenv global 2.6.5"
 gem install bundler
 ./bin/setup

@@ -9,6 +9,7 @@ task :spec => [:vagrant_runner] do
 end
 
 task :vagrant_runner do
-  VagrantRunner.new("default", "/home/test/boxes", "root")
+  include VagrantRunner
+  VagrantRunner.start_vm("default")
 end
 
