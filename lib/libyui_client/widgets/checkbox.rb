@@ -4,12 +4,18 @@ module LibyuiClient
   module Widgets
     # Class representing a Checkbox in UI. It can be YCheckBox.
     class Checkbox < Widgets::Base
+      def initialize(widget_controller, filter)
+        super(widget_controller, filter)
+        @check_action = Actions.new Actions::CHECK
+        @uncheck_action = Actions.new Actions::UNCHECK
+        @toggle_action = Actions.new Actions::TOGGLE
+      end
       # Sends action to explicitly check the checkbox in UI (regardless of the current state).
       # @return [Checkbox] in case action is successful
       # @example Check checkbox with id 'test'
       #   app.checkbox(id: 'test').check
       def check
-        action(action: Actions::CHECK)
+        @check_action.execute(self)
         self
       end
 
@@ -36,7 +42,7 @@ module LibyuiClient
       # @example Toggle checkbox with id 'test'
       #   app.checkbox(id: 'test').toggle
       def toggle
-        action(action: Actions::TOGGLE)
+        @toggle_action.execute(self)
         self
       end
 
@@ -45,7 +51,7 @@ module LibyuiClient
       # @example Uncheck checkbox with id 'test'
       #   checkbox(id: 'test').uncheck
       def uncheck
-        action(action: Actions::UNCHECK)
+        @uncheck_action.execute(self)
         self
       end
     end

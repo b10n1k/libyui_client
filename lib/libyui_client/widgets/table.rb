@@ -65,7 +65,7 @@ module LibyuiClient
       #   # [test.item.1, "", "", ""]
       #   # [test.item.2, "", "", ""]
       def items
-        property(:items).map { |x| x[:labels] }
+        property(:items).dig_and_select_for(:labels)
       end
 
       # Sends action to select a row in a table.

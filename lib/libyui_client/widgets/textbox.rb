@@ -4,6 +4,10 @@ module LibyuiClient
   module Widgets
     # Class representing a textbox in the UI. It can be YInputField.
     class Textbox < Widgets::Base
+      def initialize(widget_controller, filter)
+        super(widget_controller, filter)
+        @edit_action = Actions.new Actions::ENTER_TEXT
+      end
       # Returns maximum string length to set in the textbox
       # @return [Integer] maximum number of character to set in the textbox
       # @example Check maximum string length in textbox with id 'test'
@@ -30,7 +34,8 @@ module LibyuiClient
       # @example Set text in textbox with id 'test' to 'my value'
       #   app.textbox(id: 'test').set('my value')
       def set(value)
-        action(action: Actions::ENTER_TEXT, value: value)
+        @edit_action.context.merge!(value: value) # or edit_action.context[:value] = 'val'
+        @edit_action.execute(self)
         self
       end
 

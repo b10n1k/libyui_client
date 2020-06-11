@@ -4,7 +4,7 @@ module LibyuiClient
   module Widgets
     class Base
       include Waitable
-
+      attr_reader :filter
       def initialize(widget_controller, filter)
         @widget_controller = widget_controller
         @filter = filter
@@ -74,11 +74,19 @@ module LibyuiClient
       # @param params [Hash] actions to be sent (e.g. action: 'press').
       # @example Send action 'press' to button widget.
       #   app.button(id: 'test').action(action: 'press')
-      def action(params)
-        LibyuiClient.logger.info("Send #{params} action for #{class_name} #{@filter}")
-        @widget_controller.send_action(@filter, params, timeout: @timeout, interval: @interval)
-      end
+      # def action(params)
+        
+      #   LibyuiClient.logger.info("Send #{params} action for #{class_name} #{@filter}")
+      #   @widget_controller.send_action(@filter, params, timeout: @timeout, interval: @interval)
+      # end
 
+      ###
+      # can replace items in the most of the widgets
+      ###
+      def items
+        property(:items).dig_and_select_for(:label)
+      end
+      
       # Get all widgets found with filter.
       # The method is mainly introduced for "type" filter, which can return an array of widgets.
       # It only makes sense to use this method whenever server side filters allow to find individually those

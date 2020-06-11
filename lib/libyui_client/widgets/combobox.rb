@@ -30,7 +30,7 @@ module LibyuiClient
       #   # Any (Highest Available)
       #   # Force NFSv3
       def items
-        property(:items).map { |x| x[:label] }
+        property(:items).dig_and_select_for(:label)
       end
 
       # Sends action to select the item in combobox.

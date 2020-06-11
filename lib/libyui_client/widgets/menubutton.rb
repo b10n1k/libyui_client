@@ -41,7 +41,7 @@ module LibyuiClient
       #   # button2
       #   # button3
       def items
-        property(:items).map { |x| x[:label] }
+        property(:items).dig_and_select_for(:label)
       end
     end
   end

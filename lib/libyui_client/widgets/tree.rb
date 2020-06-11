@@ -59,7 +59,7 @@ module LibyuiClient
       #   # node1|node1_2|node1_2_2
       #   # node2
       def items
-        get_nodes(property(:items))
+        property(:items).dig_and_select_for(:label)
       end
 
       # Sends action to select an item from the tree in UI.
@@ -125,13 +125,6 @@ module LibyuiClient
       end
 
       private
-
-      def get_nodes(items, root = '')
-        items.map do |x|
-          current = root.empty? ? x[:label] : root + '|' + x[:label]
-          x.key?(:children) ? [current, get_nodes(x[:children], current)] : current
-        end.flatten
-      end
 
       def get_selected_node(items, root = '')
         selected = ''
