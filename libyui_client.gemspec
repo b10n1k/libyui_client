@@ -7,8 +7,9 @@ require 'libyui_client/version'
 Gem::Specification.new do |spec|
   spec.name          = 'libyui_client'
   spec.version       = LibyuiClient::VERSION
-  spec.authors       = ['Joaquin Rivera']
-  # spec.email         = ["TODO: Write your email address"]
+  spec.required_ruby_version = '>= 2.5.0'
+  spec.authors       = ['Joaquin Rivera', 'Ioannis Bonatakis', 'Oleksandr Orlov', 'Rodion Iafarov', 'Sofia Syrianidou']
+  spec.email         = ['qa-sle-yast@suse.de']
 
   spec.summary       = 'Client for libyui applications.'
   spec.description   = 'Client to operate controls for libyui applications.'
@@ -37,7 +38,7 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_development_dependency 'bundler', '~> 2.0'
-  spec.add_development_dependency 'rake', '~> 10.0'
-  spec.add_development_dependency 'rspec', '~> 3.0'
+  spec.add_development_dependency 'bundler'
+  spec.add_development_dependency 'rake'
+  spec.add_development_dependency 'rspec'
 end
